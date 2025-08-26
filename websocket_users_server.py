@@ -8,8 +8,10 @@ from websockets import ServerConnection
 async def echo(websocket: ServerConnection):
     async for message in websocket:
         print(f"Получено сообщение от пользователя: {message}")
-        response = f"Сервер получил: {message}"
+        count_message = 0
         for _ in range(5):
+            count_message += 1
+            response = f"{count_message} Сообщение пользователя: {message}"
             await websocket.send(response)  # Отправляем ответ
 
 
