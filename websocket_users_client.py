@@ -14,5 +14,4 @@ async def client():
             print(response)
 
 
-# for _ in range(5):
 asyncio.run(client())
