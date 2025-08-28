@@ -12,6 +12,9 @@ class CreateUserRequestDict(TypedDict):
 
 
 class PublicUsersClient(APIClient):
+    """
+    Клиент для работы с /api/v1/users без авторизации
+    """
 
     def create_new_user_api(self, create_user_data: CreateUserRequestDict) -> Response:
         """
