@@ -3,7 +3,7 @@ from typing import TypedDict
 from httpx import Response
 
 
-class CreateUserDict(TypedDict):
+class CreateUserRequestDict(TypedDict):
     email: str
     password: str
     lastName: str
@@ -13,7 +13,7 @@ class CreateUserDict(TypedDict):
 
 class PublicUsersClient(APIClient):
 
-    def create_new_user_api(self,create_user_data: CreateUserDict) -> Response:
+    def create_new_user_api(self,create_user_data: CreateUserRequestDict) -> Response:
         """
         Метод для создания нового пользователя
         :param create_user_data: Словарь с данными по пользователю: email, password, lastName, firstName, middleName
