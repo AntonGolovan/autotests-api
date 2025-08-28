@@ -13,7 +13,7 @@ class CreateUserRequestDict(TypedDict):
 
 class PublicUsersClient(APIClient):
 
-    def create_new_user_api(self,create_user_data: CreateUserRequestDict) -> Response:
+    def create_new_user_api(self, create_user_data: CreateUserRequestDict) -> Response:
         """
         Метод для создания нового пользователя
         :param create_user_data: Словарь с данными по пользователю: email, password, lastName, firstName, middleName
