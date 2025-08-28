@@ -4,6 +4,9 @@ from httpx import Response
 
 
 class CreateUserRequestDict(TypedDict):
+    """
+    Описание структуры запроса для создания нового пользователя
+    """
     email: str
     password: str
     lastName: str
