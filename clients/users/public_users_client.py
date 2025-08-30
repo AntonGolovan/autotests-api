@@ -1,6 +1,19 @@
 from clients.api_client import APIClient
 from typing import TypedDict
 from httpx import Response
+from clients.public_http_builder import get_public_http_client
+
+
+# Добавили описание структуры пользователя
+class User(TypedDict):
+    """
+    Описание структуры пользователя.
+    """
+    id: str
+    email: str
+    lastName: str
+    firstName: str
+    middleName: str
 
 
 class CreateUserRequestDict(TypedDict):
@@ -14,15 +27,38 @@ class CreateUserRequestDict(TypedDict):
     middleName: str
 
 
+# Добавили описание структуры ответа создания пользователя
+class CreateUserResponseDict(TypedDict):
+    """
+    Описание структуры ответа создания пользователя.
+    """
+    user: User
+
+
 class PublicUsersClient(APIClient):
     """
     Клиент для работы с /api/v1/users без авторизации
     """
 
-    def create_new_user_api(self, create_user_data: CreateUserRequestDict) -> Response:
+    def create_user_api(self, create_user_payload: CreateUserRequestDict) -> Response:
         """
         Метод для создания нового пользователя
-        :param create_user_data: Словарь с данными по пользователю: email, password, lastName, firstName, middleName
+        :param create_user_payload: Словарь с данными по пользователю: email, password, lastName, firstName, middleName
         :return: Ответ от сервера в виде объекта httpx.Response
         """
-        return self.client.post(url="/api/v1/users", json=create_user_data)
+        return self.client.post(url="/api/v1/users", json=create_user_payload)
+
+    # Добавили новый метод
+    def create_user(self, create_user_payload: CreateUserRequestDict) -> CreateUserResponseDict:
+        response = self.create_user_api(create_user_payload)
+        return response.json()
+
+
+# Добавляем builder для PublicUsersClient
+def get_public_users_client() -> PublicUsersClient:
+    """
+    Функция создаёт экземпляр PublicUsersClient с уже настроенным HTTP-клиентом.
+
+    :return: Готовый к использованию PublicUsersClient.
+    """
+    return PublicUsersClient(client=get_public_http_client())

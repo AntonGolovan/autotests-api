@@ -1,11 +1,13 @@
 from typing import Any
 from httpx import Client, URL, Response, QueryParams
 from httpx._types import RequestData, RequestFiles
+from faker import Faker
 
 
 class APIClient:
     def __init__(self, client: Client):
         self.client = client
+        self.fake = Faker()
 
     def get(self, url: URL | str, params: QueryParams | None = None) -> Response:
         """
