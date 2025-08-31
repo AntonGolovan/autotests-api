@@ -41,16 +41,16 @@ class ExercisesClient(APIClient):
         """
         return self.client.get(url="/api/v1/exercises")
 
-    def get_exercises_by_id(self, exercises_id: str) -> Response:
+    def get_exercise(self, exercises_id: str) -> Response:
         """
-        Метод получения конкретного exercises по exercise_id
+        Метод получения конкретного exercise по id
 
         :param exercises_id: Идентификатор exercises
         :return: Объект Response с данными ответа.
         """
         return self.client.get(url=f"/api/v1/exercises/{exercises_id}")
 
-    def create_exercises(self, create_exercises_payload: CreateExercisesRequestDict) -> Response:
+    def create_exercise(self, request: CreateExercisesRequestDict) -> Response:
         """
         Метод для создания exercises
 
@@ -58,9 +58,9 @@ class ExercisesClient(APIClient):
         description, estimatedTime.
         :return: Объект Response с данными ответа.
         """
-        return self.client.post(url="/api/v1/exercises", json=create_exercises_payload)
+        return self.client.post(url="/api/v1/exercises", json=request)
 
-    def update_exercises(self, update_exercises_payload: UpdateExercisesRequestDict, exercise_id: str) -> Response:
+    def update_exercise(self, request: UpdateExercisesRequestDict, exercise_id: str) -> Response:
         """
         Метод для изменения exercises
 
@@ -69,13 +69,13 @@ class ExercisesClient(APIClient):
         :param: exercise_id: Идентификатор exercise
         :return: Объект Response с данными ответа.
         """
-        return self.client.patch(url=f"/api/v1/exercises/{exercise_id}", json=update_exercises_payload)
+        return self.client.patch(url=f"/api/v1/exercises/{exercise_id}", json=request)
 
-    def delete_exercises(self, exercise_id: str) -> Response:
+    def delete_exercise(self, exercise_id: str) -> Response:
         """
         Метод для удаления exercises по exercise_id
 
         :param exercise_id: Идентификатор exercise
         :return: Объект Response с данными ответа.
         """
-        return self.client.get(url=f"/api/v1/exercises/{exercise_id}")
+        return self.client.delete(url=f"/api/v1/exercises/{exercise_id}")
