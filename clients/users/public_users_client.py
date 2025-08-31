@@ -40,17 +40,17 @@ class PublicUsersClient(APIClient):
     Клиент для работы с /api/v1/users без авторизации
     """
 
-    def create_user_api(self, create_user_payload: CreateUserRequestDict) -> Response:
+    def create_user_api(self, request: CreateUserRequestDict) -> Response:
         """
         Метод для создания нового пользователя
-        :param create_user_payload: Словарь с данными по пользователю: email, password, lastName, firstName, middleName
+        :param request: Словарь с данными по пользователю: email, password, lastName, firstName, middleName
         :return: Ответ от сервера в виде объекта httpx.Response
         """
-        return self.client.post(url="/api/v1/users", json=create_user_payload)
+        return self.client.post(url="/api/v1/users", json=request)
 
     # Добавили новый метод
-    def create_user(self, create_user_payload: CreateUserRequestDict) -> CreateUserResponseDict:
-        response = self.create_user_api(create_user_payload)
+    def create_user(self, request: CreateUserRequestDict) -> CreateUserResponseDict:
+        response = self.create_user_api(request)
         return response.json()
 
 

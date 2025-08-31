@@ -3,7 +3,10 @@ from httpx import Client
 from clients.authentication.authentication_client import get_authentication_client, LoginRequestDict
 
 
-class AuthenticationUserDict(TypedDict):  # Структура данных пользователя для авторизации
+class AuthenticationUserDict(TypedDict):
+    """
+    Cтруктура данных пользователя для авторизации
+    """
     email: str
     password: str
 
