@@ -130,7 +130,7 @@ class ExercisesClient(APIClient):
         """
         return self.client.delete(url=f"/api/v1/exercises/{exercise_id}")
 
-    def create_exercise(self, request: CreateExercisesRequestDict) -> CreateExerciseResponseDict:
+    def create_exercise(self, request: CreateExerciseRequestDict) -> CreateExerciseResponseDict:
         response = self.create_exercise_api(request=request)
         return response.json()
 
@@ -142,7 +142,7 @@ class ExercisesClient(APIClient):
         response = self.get_exercise_api(exercises_id=exercises_id)
         return response.json()
 
-    def update_exercise(self, request: UpdateExercisesRequestDict, exercises_id: str) -> UpdateExerciseResponse:
+    def update_exercise(self, request: UpdateExerciseRequestDict, exercises_id: str) -> UpdateExerciseResponse:
         response = self.update_exercise_api(request=request, exercise_id=exercises_id)
         return response.json()
 
