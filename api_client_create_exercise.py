@@ -1,7 +1,7 @@
 from clients.authentication.authentication_client import get_authentication_client
 from clients.courses.courses_client import get_courses_client, CreateCourseRequestDict
 from clients.files.files_client import get_files_client, CreateFileRequestDict
-from clients.exercises.exercises_client import get_exercises_client, CreateExercisesRequestDict
+from clients.exercises.exercises_client import get_exercises_client, CreateExerciseRequestDict
 from clients.private_http_builder import AuthenticationUserDict
 from clients.users.public_users_client import get_public_users_client, CreateUserRequestDict
 from tools.fakers import *
@@ -23,9 +23,6 @@ authentication_user = AuthenticationUserDict(
     email=create_user_request["email"],
     password=create_user_request["password"]
 )
-
-authentication_client = get_authentication_client()
-
 files_client = get_files_client(user=authentication_user)
 courses_client = get_courses_client(user=authentication_user)
 
@@ -35,7 +32,6 @@ create_file_request = CreateFileRequestDict(
     directory="courses",
     upload_file="./testdata/files/image.png"
 )
-
 create_file_response = files_client.create_file(create_file_request)
 print('Create file data:', create_file_response)
 
@@ -54,7 +50,7 @@ print('Create course data:', create_course_response)
 
 exercises_client = get_exercises_client(user=authentication_user)
 
-create_exercise_request = CreateExercisesRequestDict(
+create_exercise_request = CreateExerciseRequestDict(
     title="Test Exercise 1",
     courseId=create_course_response["course"]["id"],
     maxScore=20,

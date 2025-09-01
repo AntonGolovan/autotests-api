@@ -134,8 +134,8 @@ class ExercisesClient(APIClient):
         response = self.create_exercise_api(request=request)
         return response.json()
 
-    def get_exercises(self) -> GetExercisesResponseDict:
-        response = self.get_exercises_api()
+    def get_exercises(self, query: GetExercisesQueryDict) -> GetExercisesResponseDict:
+        response = self.get_exercises_api(query=query)
         return response.json()
 
     def get_exercise(self, exercises_id: str) -> GetExerciseResponseDict:
