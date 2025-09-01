@@ -4,18 +4,10 @@ from httpx import Response
 from clients.private_http_builder import get_private_http_client, AuthenticationUserDict
 
 
-class Exercises(TypedDict):
-    id: str
-    title: str
-    courseId: str
-    maxScore: int
-    minScore: int
-    orderIndex: int
-    description: str
-    estimatedTime: str
-
-
 class Exercise(TypedDict):
+    """
+    Описание структуры Exercise
+    """
     id: str
     title: str
     courseId: str
@@ -24,25 +16,44 @@ class Exercise(TypedDict):
     orderIndex: int
     description: str
     estimatedTime: str
+
+
+class GetExercisesQueryDict(TypedDict):
+    """
+    Описание структуры запроса на получения списка заданий
+    """
+    courseId: str
 
 
 class GetExerciseResponseDict(TypedDict):
+    """
+    Описание структуры ответа получения задания
+    """
     exercise: Exercise
 
 
 class GetExercisesResponseDict(TypedDict):
-    exercises: list[Exercises]
+    """
+    Описание структуры ответа получения списка заданий
+    """
+    exercises: list[Exercise]
 
 
 class CreateExerciseResponseDict(TypedDict):
-    exercises: Exercises
-
-
-class UpdateExerciseResponse(TypedDict):
+    """
+    Описание структуры ответа создания задания
+    """
     exercise: Exercise
 
 
-class CreateExercisesRequestDict(TypedDict):
+class UpdateExerciseResponse(TypedDict):
+    """
+    Описание структуры ответа на обновление задания
+    """
+    exercise: Exercise
+
+
+class CreateExerciseRequestDict(TypedDict):
     """
     Описание структуры запроса на создание exercises
     """
@@ -55,7 +66,7 @@ class CreateExercisesRequestDict(TypedDict):
     estimatedTime: str
 
 
-class UpdateExercisesRequestDict(TypedDict):
+class UpdateExerciseRequestDict(TypedDict):
     """
     Описание структуры запроса на изменение exercises
     """
@@ -71,26 +82,27 @@ class ExercisesClient(APIClient):
     Клиент для работы с /api/v1/exercises
     """
 
-    def get_exercises_api(self) -> Response:
+    def get_exercises_api(self, query: GetExercisesQueryDict) -> Response:
         """
-        Метод получения всех exercises
+        Метод получения списка exercises
 
+        :param: Словарь с courseId.
         :return: Объект Response с данными ответа.
         """
-        return self.client.get(url="/api/v1/exercises")
+        return self.client.get(url="/api/v1/exercises", params=query)
 
     def get_exercise_api(self, exercises_id: str) -> Response:
         """
-        Метод получения конкретного exercise по id
+        Метод получения задания по exercises_id
 
-        :param exercises_id: Идентификатор exercises
+        :param exercises_id: Идентификатор exercise
         :return: Объект Response с данными ответа.
         """
         return self.client.get(url=f"/api/v1/exercises/{exercises_id}")
 
-    def create_exercise_api(self, request: CreateExercisesRequestDict) -> Response:
+    def create_exercise_api(self, request: CreateExerciseRequestDict) -> Response:
         """
-        Метод для создания exercises
+        Метод для создания задания
 
         :param: create_exercises_payload: Словарь с title, courseId, maxScore, minScore, orderIndex,
         description, estimatedTime.
@@ -98,9 +110,9 @@ class ExercisesClient(APIClient):
         """
         return self.client.post(url="/api/v1/exercises", json=request)
 
-    def update_exercise_api(self, request: UpdateExercisesRequestDict, exercise_id: str) -> Response:
+    def update_exercise_api(self, request: UpdateExerciseRequestDict, exercise_id: str) -> Response:
         """
-        Метод для изменения exercises
+        Метод для изменения задания  по exercise_id
 
         :param: update_exercises_payload: Словарь с title, courseId, maxScore, minScore, orderIndex,
         description, estimatedTime.
@@ -111,7 +123,7 @@ class ExercisesClient(APIClient):
 
     def delete_exercise_api(self, exercise_id: str) -> Response:
         """
-        Метод для удаления exercises по exercise_id
+        Метод для удаления задания по exercise_id
 
         :param exercise_id: Идентификатор exercise
         :return: Объект Response с данными ответа.
