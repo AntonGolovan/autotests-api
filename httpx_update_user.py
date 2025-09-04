@@ -1,6 +1,6 @@
 import httpx
 from pprint import pprint
-from tools.fakers import get_random_email
+from tools.fakers import fake
 from faker import Faker
 
 fake = Faker()
@@ -12,7 +12,7 @@ create_user_url = "/api/v1/users"
 update_user_by_id_url = "/api/v1/users/"
 
 create_user_payload = {
-    "email": get_random_email(),
+    "email": fake.email(),
     "password": "string",
     "lastName": "string",
     "firstName": "string",
@@ -42,7 +42,7 @@ assert get_user_response.status_code == 200, f"Wrong! Expected status code 200, 
 user_id = get_user_response.json()["user"]["id"]
 
 update_user_payload = {
-    "email": get_random_email(),
+    "email": fake.email(),
     "lastName": fake.last_name(),
     "firstName": fake.first_name(),
     "middleName": fake.first_name()
