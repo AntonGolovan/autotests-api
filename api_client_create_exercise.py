@@ -1,8 +1,7 @@
-from clients.authentication.authentication_client import get_authentication_client
 from clients.courses.courses_client import get_courses_client, CreateCourseRequestDict
 from clients.files.files_client import get_files_client, CreateFileRequestDict
 from clients.exercises.exercises_client import get_exercises_client, CreateExerciseRequestDict
-from clients.private_http_builder import AuthenticationUserDict
+from clients.private_http_builder import AuthenticationUserSchema
 from clients.users.public_users_client import get_public_users_client, CreateUserRequestDict
 from tools.fakers import *
 
@@ -19,9 +18,9 @@ create_user_request = CreateUserRequestDict(
 create_user_response = public_users_client.create_user(request=create_user_request)
 print('Create user data:', create_user_response)
 
-authentication_user = AuthenticationUserDict(
-    email=create_user_request["email"],
-    password=create_user_request["password"]
+authentication_user = AuthenticationUserSchema(
+    email=create_user_request['email'],
+    password=create_user_request['password']
 )
 files_client = get_files_client(user=authentication_user)
 courses_client = get_courses_client(user=authentication_user)
