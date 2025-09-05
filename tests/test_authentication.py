@@ -23,5 +23,4 @@ def test_login():
 
     assert_status_code(actual=login_response.status_code, expected=HTTPStatus.OK)
     assert_login_response(response=login_response_data)
-
     validate_json_schema(instance=login_response.json(), schema=login_response_data.model_json_schema())
