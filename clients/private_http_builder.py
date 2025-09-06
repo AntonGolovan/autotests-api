@@ -1,6 +1,5 @@
 from httpx import Client
 from pydantic import BaseModel
-
 from clients.authentication.authentication_client import get_authentication_client
 # Импортируем модель LoginRequestSchema
 from clients.authentication.authentication_schema import LoginRequestSchema
