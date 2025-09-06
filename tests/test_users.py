@@ -25,8 +25,7 @@ from tools.fakers import fake
         "gmail.com",
         "example.com",
     ],
-    ids=lambda
-            domain: f'Test create user wint email domain: {domain}'
+    ids=lambda domain: f'Test create user wint email domain: {domain}'
 )
 def test_create_user(email: str, public_users_client: PublicUsersClient):
     request = CreateUserRequestSchema(
