@@ -1,4 +1,4 @@
 pytest_plugins = (
-     "fixtures.users",
-     "fixtures.authentication"
+    "fixtures.creative_fixture",
+    "fixtures.campaign_fixture"
  )
