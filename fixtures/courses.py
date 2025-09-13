@@ -1,6 +1,5 @@
 import pytest
 from pydantic import BaseModel
-
 from clients.courses.courses_client import CoursesClient, get_courses_client
 from clients.courses.courses_schema import CreateCourseRequestSchema, CreateCourseResponseSchema
 from fixtures.files import FileFixture
@@ -11,6 +10,9 @@ class CourseFixture(BaseModel):
     request: CreateCourseRequestSchema
     response: CreateCourseResponseSchema
 
+    @property
+    def course_id(self):
+        return self.response.course.id
 
 @pytest.fixture
 def courses_client(function_user: UserFixture) -> CoursesClient:
