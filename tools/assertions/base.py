@@ -1,4 +1,3 @@
-from typing import Any
 from typing import Any, Sized
 
 def assert_status_code(actual: int, expected: int):

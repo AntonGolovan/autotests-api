@@ -30,6 +30,10 @@ class UserFixture(BaseModel):
             password=self.password
         )
 
+    @property
+    def user_id(self) -> str:
+        return self.response.user.id
+
 @pytest.fixture
 def public_users_client() -> PublicUsersClient:
     return get_public_users_client()
