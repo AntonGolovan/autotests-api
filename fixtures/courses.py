@@ -11,7 +11,7 @@ class CourseFixture(BaseModel):
     response: CreateCourseResponseSchema
 
     @property
-    def course_id(self):
+    def course_id(self) -> str:
         return self.response.course.id
 
 @pytest.fixture
