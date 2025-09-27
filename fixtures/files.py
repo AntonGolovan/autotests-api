@@ -10,6 +10,10 @@ class FileFixture(BaseModel):
     request: CreateFileRequestSchema
     response: CreateFileResponseSchema
 
+    @property
+    def file_id(self) -> str:
+        return self.response.file.id
+
 
 @pytest.fixture
 def files_client(function_user: UserFixture) -> FilesClient:
