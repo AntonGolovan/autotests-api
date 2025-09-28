@@ -10,6 +10,10 @@ class ExerciseFixture(BaseModel):
     request: CreateExerciseRequestSchema
     response: CreateExerciseResponseSchema
 
+    @property
+    def exercise_id(self) -> str:
+        return self.response.exercise.id
+
 
 @pytest.fixture()
 def exercises_client(
