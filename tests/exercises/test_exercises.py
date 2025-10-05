@@ -1,6 +1,6 @@
 from http import HTTPStatus
+import allure
 import pytest
-
 from clients.errors_schema import InternalErrorResponseSchema
 from clients.exercises.exercises_client import ExercisesClient
 from clients.exercises.exercises_schema import (
@@ -14,6 +14,7 @@ from clients.exercises.exercises_schema import (
 )
 from fixtures.courses import CourseFixture
 from fixtures.exercises import ExerciseFixture
+from tools.allure.tags import AllureTag
 from tools.assertions.base import assert_status_code
 from tools.assertions.exercises import (
     assert_create_exercise_response,
@@ -23,12 +24,22 @@ from tools.assertions.exercises import (
     assert_get_exercises_response,
 )
 from tools.assertions.schema import validate_json_schema
+from tools.allure.epics import AllureEpic  # Импортируем enum AllureEpic
+from tools.allure.features import AllureFeature  # Импортируем enum AllureFeature
+from tools.allure.stories import AllureStory  # Импортируем enum AllureStory
+from allure_commons.types import Severity  # Импортируем enum Severity из Allure
 
 
 @pytest.mark.exercises
 @pytest.mark.regression
+@allure.tag(AllureTag.EXERCISES, AllureTag.REGRESSION)  # Добавили теги
+@allure.epic(AllureEpic.LMS)  # Добавили epic
+@allure.feature(AllureFeature.EXERCISES)  # Добавили feature
 class TestExercises:
-
+    @allure.tag(AllureTag.CREATE_ENTITY)  # Добавили тег
+    @allure.story(AllureStory.CREATE_ENTITY)  # Добавили story
+    @allure.severity(Severity.BLOCKER)  # Добавили severity
+    @allure.title("Create exercise")  # Добавили заголовок
     def test_create_exercise(
             self,
             exercises_client: ExercisesClient,
@@ -44,6 +55,10 @@ class TestExercises:
         assert_create_exercise_response(request=request, response=response_data)
         validate_json_schema(instance=response.json(), schema=response_data.model_json_schema())
 
+    @allure.tag(AllureTag.GET_ENTITY)  # Добавили тег
+    @allure.story(AllureStory.GET_ENTITY)  # Добавили story
+    @allure.severity(Severity.BLOCKER)  # Добавили severity
+    @allure.title("Get exercise")  # Добавили заголовок
     def test_get_exercise(
             self,
             exercises_client: ExercisesClient,
@@ -56,6 +71,10 @@ class TestExercises:
         assert_get_exercise_response(get_exercise_response=response_data, create_exercise_response=function_exercise.response)
         validate_json_schema(instance=response.json(), schema=response_data.model_json_schema())
 
+    @allure.tag(AllureTag.UPDATE_ENTITY)  # Добавили тег
+    @allure.story(AllureStory.UPDATE_ENTITY)  # Добавили story
+    @allure.severity(Severity.CRITICAL)  # Добавили severity
+    @allure.title("Update exercise")  # Добавили заголовок
     def test_update_exercise(
             self,
             exercises_client: ExercisesClient,
@@ -69,6 +88,10 @@ class TestExercises:
         assert_update_exercise_response(request=request, response=response_data)
         validate_json_schema(instance=response.json(), schema=response_data.model_json_schema())
 
+    @allure.tag(AllureTag.DELETE_ENTITY)  # Добавили тег
+    @allure.story(AllureStory.DELETE_ENTITY)  # Добавили story
+    @allure.severity(Severity.CRITICAL)  # Добавили severity
+    @allure.title("Delete exercise")  # Добавили заголовок
     def test_delete_exercise(
             self,
             exercises_client: ExercisesClient,
@@ -85,6 +108,10 @@ class TestExercises:
             instance=get_exercise_response.json(), schema=get_exercise_response_data.model_json_schema()
         )
 
+    @allure.tag(AllureTag.GET_ENTITIES)  # Добавили тег
+    @allure.story(AllureStory.GET_ENTITIES)  # Добавили story
+    @allure.severity(Severity.BLOCKER)  # Добавили severity
+    @allure.title("Get exercises")  # Добавили заголовок
     def test_get_exercises(
             self,
             exercises_client: ExercisesClient,
