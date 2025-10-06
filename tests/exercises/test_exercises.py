@@ -35,9 +35,12 @@ from allure_commons.types import Severity  # Импортируем enum Severit
 @allure.tag(AllureTag.EXERCISES, AllureTag.REGRESSION)  # Добавили теги
 @allure.epic(AllureEpic.LMS)  # Добавили epic
 @allure.feature(AllureFeature.EXERCISES)  # Добавили feature
+@allure.parent_suite(AllureEpic.LMS)
+@allure.suite(AllureFeature.EXERCISES)
 class TestExercises:
     @allure.tag(AllureTag.CREATE_ENTITY)  # Добавили тег
     @allure.story(AllureStory.CREATE_ENTITY)  # Добавили story
+    @allure.sub_suite(AllureStory.CREATE_ENTITY)
     @allure.severity(Severity.BLOCKER)  # Добавили severity
     @allure.title("Create exercise")  # Добавили заголовок
     def test_create_exercise(
@@ -57,6 +60,7 @@ class TestExercises:
 
     @allure.tag(AllureTag.GET_ENTITY)  # Добавили тег
     @allure.story(AllureStory.GET_ENTITY)  # Добавили story
+    @allure.sub_suite(AllureStory.GET_ENTITY)
     @allure.severity(Severity.BLOCKER)  # Добавили severity
     @allure.title("Get exercise")  # Добавили заголовок
     def test_get_exercise(
@@ -73,6 +77,7 @@ class TestExercises:
 
     @allure.tag(AllureTag.UPDATE_ENTITY)  # Добавили тег
     @allure.story(AllureStory.UPDATE_ENTITY)  # Добавили story
+    @allure.sub_suite(AllureStory.UPDATE_ENTITY)
     @allure.severity(Severity.CRITICAL)  # Добавили severity
     @allure.title("Update exercise")  # Добавили заголовок
     def test_update_exercise(
@@ -90,6 +95,7 @@ class TestExercises:
 
     @allure.tag(AllureTag.DELETE_ENTITY)  # Добавили тег
     @allure.story(AllureStory.DELETE_ENTITY)  # Добавили story
+    @allure.sub_suite(AllureStory.DELETE_ENTITY)
     @allure.severity(Severity.CRITICAL)  # Добавили severity
     @allure.title("Delete exercise")  # Добавили заголовок
     def test_delete_exercise(
@@ -110,6 +116,7 @@ class TestExercises:
 
     @allure.tag(AllureTag.GET_ENTITIES)  # Добавили тег
     @allure.story(AllureStory.GET_ENTITIES)  # Добавили story
+    @allure.sub_suite(AllureStory.GET_ENTITIES)
     @allure.severity(Severity.BLOCKER)  # Добавили severity
     @allure.title("Get exercises")  # Добавили заголовок
     def test_get_exercises(

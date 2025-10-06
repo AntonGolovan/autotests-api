@@ -19,8 +19,11 @@ from allure_commons.types import Severity  # Импортируем enum Severit
 @allure.tag(AllureTag.REGRESSION, AllureTag.AUTHENTICATION)  # Добавили теги
 @allure.epic(AllureEpic.LMS)  # Добавили epic
 @allure.feature(AllureFeature.AUTHENTICATION)  # Добавили feature
+@allure.parent_suite(AllureEpic.LMS)
+@allure.suite(AllureFeature.AUTHENTICATION)
 class TestAuthentication:
     @allure.story(AllureStory.LOGIN)  # Добавили story
+    @allure.sub_suite(AllureStory.LOGIN)
     @allure.title("Login with correct email and password")  # Добавили заголовок
     @allure.severity(Severity.BLOCKER)  # Добавили severity
     def test_login(self, function_user: UserFixture, authentication_client: AuthenticationClient):

@@ -33,9 +33,12 @@ from allure_commons.types import Severity  # Импортируем enum Severit
 @allure.tag(AllureTag.COURSES, AllureTag.REGRESSION)  # Добавили теги
 @allure.epic(AllureEpic.LMS)  # Добавили epic
 @allure.feature(AllureFeature.COURSES)  # Добавили feature
+@allure.parent_suite(AllureEpic.LMS)
+@allure.suite(AllureFeature.COURSES)
 class TestCourses:
     @allure.tag(AllureTag.CREATE_ENTITY)  # Добавили тег
     @allure.story(AllureStory.CREATE_ENTITY)  # Добавили story
+    @allure.sub_suite(AllureStory.CREATE_ENTITY)
     @allure.severity(Severity.BLOCKER)  # Добавили severity
     @allure.title("Create course")  # Добавили заголовок
     def test_create_course(
@@ -57,6 +60,7 @@ class TestCourses:
 
     @allure.tag(AllureTag.GET_ENTITIES)  # Добавили тег
     @allure.story(AllureStory.GET_ENTITIES)  # Добавили story
+    @allure.sub_suite(AllureStory.GET_ENTITY)
     @allure.severity(Severity.BLOCKER)  # Добавили severity
     @allure.title("Get courses")  # Добавили заголовок
     def test_get_courses(
@@ -82,6 +86,7 @@ class TestCourses:
 
     @allure.tag(AllureTag.UPDATE_ENTITY)  # Добавили тег
     @allure.story(AllureStory.UPDATE_ENTITY)  # Добавили story
+    @allure.sub_suite(AllureStory.UPDATE_ENTITY)
     @allure.severity(Severity.CRITICAL)  # Добавили severity
     @allure.title("Update course")  # Добавили заголовок
     def test_update_course(
